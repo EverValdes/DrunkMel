@@ -13,6 +13,6 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    <string name="numberOfPlayers">Number of players selected</string>
+    <string name="numberOfPlayers">Number of players selected: </string>
 
 </resources>

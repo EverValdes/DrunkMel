@@ -18,13 +18,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void loadUI() {
-        getActionBar().setTitle(R.string.playerActivityTitle);
+        getSupportActionBar().setTitle(R.string.playerActivityTitle);
 
         standartGame = (Button) findViewById(R.id.standartGame);
         standartGame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent gameIntent = new Intent(GameActivity.this, GameActivity.class);
+                Intent gameIntent = new Intent(GameActivity.this, PlayerActivity.class);
                 startActivity(gameIntent);
             }
 
