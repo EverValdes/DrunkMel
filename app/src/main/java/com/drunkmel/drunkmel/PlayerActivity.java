@@ -1,0 +1,48 @@
+package com.drunkmel.drunkmel;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+public class PlayerActivity extends AppCompatActivity {
+    private Spinner comboBoxPlayers;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_player);
+        loadUI();
+        configureComboBox();
+    }
+
+    private void loadUI() {
+        comboBoxPlayers = (Spinner) findViewById(R.id.playerComboBox);
+    }
+
+    private void configureComboBox() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.playerArray, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        comboBoxPlayers.setAdapter(adapter);
+        comboBoxPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Display number of players selected
+                Toast.makeText(parent.getContext(), getResources().getString(R.string.numberOfPlayers) + parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+}

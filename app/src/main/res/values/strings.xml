@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">DrunkMel</string>
+    <string name="starButton">Start</string>
+    <string name="standartGame">Standart Game</string>
+    <string name="customGame">Custom Game</string>
+
+    <!-- Player Activity-->
+    <string name="playerActivityTitle">Player</string>
+    <string-array name="playerArray">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string name="numberOfPlayers">Number of players selected</string>
+
+</resources>
