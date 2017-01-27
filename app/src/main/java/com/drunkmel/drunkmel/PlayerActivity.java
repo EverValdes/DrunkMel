@@ -1,48 +1,44 @@
 package com.drunkmel.drunkmel;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.ListView;
 
 public class PlayerActivity extends AppCompatActivity {
-    private Spinner comboBoxPlayers;
+
+    //Variabes declaration
+    ListView listView;
+    Button addPlayer;
+    Button next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-        loadUI();
-        configureComboBox();
+        //Load the UI elements and listeners
+        Context context = getApplicationContext();
+        loadUI(context);
+
+        PlayersListViewAdapter listViewAdapter = new PlayersListViewAdapter(context);
+        listView.setAdapter(listViewAdapter);
     }
 
-    private void loadUI() {
-        comboBoxPlayers = (Spinner) findViewById(R.id.playerComboBox);
-    }
-
-    private void configureComboBox() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.playerArray, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        comboBoxPlayers.setAdapter(adapter);
-        comboBoxPlayers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Display number of players selected
-                Toast.makeText(parent.getContext(), getResources().getString(R.string.numberOfPlayers) + parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+    public void loadUI(final Context context){
+        //Find the elements
+        listView = (ListView) findViewById(R.id.playerList);
+        addPlayer = (Button) findViewById(R.id.addPlayer);
+        next = (Button) findViewById(R.id.next);
+        //Listeners
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(context, ChallengeActivity.class));
             }
         });
+
     }
+
 }
