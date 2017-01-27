@@ -27,5 +27,14 @@ public class MelActivity extends AppCompatActivity {
             }
         });
 
+        Button challengeButton = (Button) findViewById(R.id.challenge);
+        challengeButton.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent playerIntent = new Intent(MelActivity.this, ChallengeActivity.class);
+                startActivity(playerIntent);
+            }
+        });
+
     }
 }

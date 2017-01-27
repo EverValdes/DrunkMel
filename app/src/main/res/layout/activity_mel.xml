@@ -31,4 +31,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="61dp" />
+<!--Delete-->
+    <Button
+        android:id="@+id/challenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHALLENGE"
+        android:layout_marginLeft="106dp"
+        android:layout_marginStart="106dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="61dp" />
 </RelativeLayout>
