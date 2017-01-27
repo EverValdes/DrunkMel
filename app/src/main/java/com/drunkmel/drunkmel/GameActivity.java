@@ -18,7 +18,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void loadUI() {
-        getSupportActionBar().setTitle(R.string.playerActivityTitle);
+        //getSupportActionBar().setTitle(R.string.playerActivityTitle);
 
         standartGame = (Button) findViewById(R.id.standartGame);
         standartGame.setOnClickListener(new View.OnClickListener(){
