@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
@@ -16,8 +17,7 @@ public class PlayerActivity extends AppCompatActivity {
     //Variabes declaration
     Button addPlayer;
     Button next;
-    ScrollView scrollView;
-    EditText playerItem;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +32,16 @@ public class PlayerActivity extends AppCompatActivity {
         //Find the elements
         addPlayer = (Button) findViewById(R.id.addPlayer);
         next = (Button) findViewById(R.id.next);
-        scrollView = (ScrollView) findViewById(R.id.scrollView);
-        playerItem = (EditText) findViewById(R.id.playerItem);
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         //Listeners
         addPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*
-                TODO
-                Check how to add a view into a scrollview programmatically
-                 */
+                EditText playerItem = new EditText(context);
+                playerItem.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                linearLayout.addView(playerItem);
+                playerItem.setHint("New Player");
             }
         });
 
