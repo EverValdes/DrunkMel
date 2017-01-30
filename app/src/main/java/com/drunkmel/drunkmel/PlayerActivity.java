@@ -4,13 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
+
+import java.util.ArrayList;
 
 public class PlayerActivity extends AppCompatActivity {
 
@@ -18,6 +18,7 @@ public class PlayerActivity extends AppCompatActivity {
     Button addPlayer;
     Button next;
     LinearLayout linearLayout;
+    ArrayList<String> players = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,14 @@ public class PlayerActivity extends AppCompatActivity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(context, ChallengeActivity.class));
+                Intent i = new Intent(context, ChallengeActivity.class);
+                for(int index=0; index<linearLayout.getChildCount(); ++index) {
+                    EditText nextChild = (EditText) linearLayout.getChildAt(index);
+                    players.add(nextChild.getText().toString());
+                    Log.d("TEST", players.get(index));
+                }
+                i.putExtra("Players", players);
+                startActivity(i);
             }
         });
 
