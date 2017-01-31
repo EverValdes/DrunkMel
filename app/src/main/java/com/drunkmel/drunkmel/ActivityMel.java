@@ -10,9 +10,9 @@ public class ActivityMel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         //We do not want to perform anything when hard back button is pressed.
-    }
+    }*/
 
 }
