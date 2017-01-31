@@ -1,6 +1,5 @@
 package com.drunkmel.drunkmel;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.drunkmel.drunkmel.interfaces.DataModel;
@@ -13,7 +12,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ChallengeActivity extends AppCompatActivity {
+public class ChallengeActivity extends ActivityMel {
     //Challenges that need to be recorded into singleton/database
     private ArrayList<ChallengeModel> challenges = new ArrayList<ChallengeModel>();
 

@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import java.io.InputStream;
 
-public class CarrouselActivity extends AppCompatActivity {
+public class CarrouselActivity extends ActivityMel {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
