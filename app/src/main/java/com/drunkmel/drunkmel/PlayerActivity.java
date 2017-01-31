@@ -56,9 +56,14 @@ public class PlayerActivity extends AppCompatActivity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //Get data from previous intent and create a new one
+                //Get data from previous intent and create a new one depending the game mode
                 String gameMode = getIntent().getExtras().getString("GAME_MODE");
-                Intent i = new Intent(context, ChallengeActivity.class);
+                Intent i;
+                if(gameMode.equalsIgnoreCase("challenge")) {
+                    i = new Intent(context, ChallengeActivity.class);
+                } else {
+                    i = new Intent(context, QuestionActivity.class);
+                }
 
                 //Get the name of all the players checking the childrens of the container
                 for(int index=0; index<linearLayout.getChildCount(); ++index) {
@@ -66,9 +71,8 @@ public class PlayerActivity extends AppCompatActivity {
                     players.add(nextChild.getText().toString());
                 }
 
-                //Set players and game mode in the intent and start new activity
+                //Set players in the intent and start new activity
                 i.putExtra("PLAYERS", players);
-                i.putExtra("GAME_MODE", gameMode);
                 startActivity(i);
             }
         });
