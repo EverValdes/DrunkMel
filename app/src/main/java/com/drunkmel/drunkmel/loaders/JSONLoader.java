@@ -1,17 +1,25 @@
 package com.drunkmel.drunkmel.loaders;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 
 import com.drunkmel.drunkmel.R;
+import com.drunkmel.drunkmel.helpers.ResourceGetter;
 import com.drunkmel.drunkmel.interfaces.DataModel;
 import com.drunkmel.drunkmel.interfaces.LoaderResource;
+import com.drunkmel.drunkmel.model.ChallengeModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by everv on 1/26/2017.
@@ -20,67 +28,51 @@ import java.util.Iterator;
 public class JSONLoader implements LoaderResource {
     private Context context;
 
-    public JSONLoader(Context context) {
+    public JSONLoader(Context context){
         this.context = context;
     }
 
     @Override
-    public DataModel[] readData() {
-        DataModel[] jsonData = null;
-        String json = readMockJsonFile(context);
+    public JSONArray readData(String dataModelType) {
+        ResourceGetter resourceGetter = ResourceGetter.getInstance(context);
 
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        /*JSONObject uniObject = jsonObject.getJSONObject("university");
-        String  title = jsonObject.getJsonString("title");
-        String description = jsonObject.getJsonString("description");*/
+        int jsonResourceID = resourceGetter.getResourceId(dataModelType, "raw", context.getPackageName());
+        String jsonString = readMockJson(jsonResourceID);
+        return formatJsonString(jsonString, dataModelType);
 
-        Iterator<String> iter = jsonObject.keys();
-        while (iter.hasNext()) {
-            String key = iter.next();
-            try {
-                DataModel jsonDataModel = null;
-                Object value = jsonObject.get(key);
-                String  title = jsonObject.getString("title");
-                String description = jsonObject.getString("description");
-                jsonDataModel.setTitle(title);
-                jsonDataModel.setDescription(description);
-            } catch (JSONException e) {
-                // Something went wrong!
-            }
-        }
-
-        return null;
     }
 
     @Override
-    public void whiteData(DataModel datamodel) {
+    public void whiteData(DataModel dataModel) {
 
     }
 
-    //Read json file and return it as string
-    private String readMockJsonFile(Context context) {
-        String json = null;
+    private String readMockJson (int resourceID) {
+        String jsonString;
         try {
-            InputStream is = context.getResources().openRawResource(R.raw.challenge);
+            InputStream is = context.getResources().openRawResource(resourceID);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
+            jsonString = new String(buffer, "UTF-8");
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
         }
-        return json;
+        return jsonString;
     }
 
+    private JSONArray formatJsonString(String jsonString, String dataModelType ) {
+        JSONArray jsonElementArray = null;
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+            jsonElementArray = jsonObject.getJSONArray(dataModelType);
+            return jsonElementArray;
 
-    private void formatData(String stringJson) {
-
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonElementArray;
     }
 }

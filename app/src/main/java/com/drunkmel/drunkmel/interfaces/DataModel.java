@@ -1,10 +1,6 @@
 package com.drunkmel.drunkmel.interfaces;
+import java.io.Serializable;
 
-public interface DataModel {
+public interface DataModel extends Serializable {
 
-
-    public String getDescription();
-    public void setDescription(String description);
-    public String getTitle();
-    public void setTitle(String title);
 }
