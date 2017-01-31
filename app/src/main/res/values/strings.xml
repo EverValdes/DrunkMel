@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">DrunkMel</string>
-    <string name="starButton">Start</string>
-    <string name="standartGame">Standart Game</string>
-    <string name="customGame">Custom Game</string>
+    <string name="challengeButton">DESAFÍOS</string>
+    <string name="questionButton">PREGUNTAS</string>
+    <string name="homeTitle">Seleccione el tipo de juego:</string>
 
     //Player Activity
     <string name="playersLabel">Add new players</string>
