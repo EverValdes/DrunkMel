@@ -1,18 +1,13 @@
 <resources>
     <string name="app_name">DrunkMel</string>
-    <string name="starButton">Start</string>
-    <string name="standartGame">Standart Game</string>
-    <string name="customGame">Custom Game</string>
+    <string name="challengeButton">DESAFÍOS</string>
+    <string name="questionButton">PREGUNTAS</string>
+    <string name="homeTitle">Seleccione el tipo de juego:</string>
 
-    <!-- Player Activity-->
-    <string name="playerActivityTitle">Players</string>
-    <string-array name="playerArray">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-    <string name="numberOfPlayers">Number of players selected: </string>
+    //Player Activity
+    <string name="playersLabel">Agrega jugadores!</string>
+    <string name="addPlayer">NUEVO JUGADOR</string>
+    <string name="next">SIGUIENTE</string>
+    <string name="newPlayerHint">Nuevo jugador</string>
 
 </resources>
