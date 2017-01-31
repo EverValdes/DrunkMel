@@ -5,8 +5,9 @@
     <string name="homeTitle">Seleccione el tipo de juego:</string>
 
     //Player Activity
-    <string name="playersLabel">Add new players</string>
-    <string name="addPlayer">Add player</string>
-    <string name="next">Next</string>
+    <string name="playersLabel">Agrega jugadores!</string>
+    <string name="addPlayer">NUEVO JUGADOR</string>
+    <string name="next">SIGUIENTE</string>
+    <string name="newPlayerHint">Nuevo jugador</string>
 
 </resources>
