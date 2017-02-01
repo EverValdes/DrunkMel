@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">DrunkMel</string>
+
+    //Shared preference file
+    <string name="preference_file_key">com.drunkmel.drunkmel.PLAYERS_TABLE</string>
+
+    //Home Activity
     <string name="challengeButton">DESAFÍOS</string>
     <string name="questionButton">PREGUNTAS</string>
     <string name="homeTitle">Seleccione el tipo de juego:</string>

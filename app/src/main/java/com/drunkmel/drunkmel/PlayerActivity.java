@@ -2,6 +2,7 @@ package com.drunkmel.drunkmel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -9,32 +10,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-
 public class PlayerActivity extends ActivityMel {
 
     //Variabes declaration
     Button addPlayer;
     Button next;
     LinearLayout linearLayout;
-    ArrayList<String> players = new ArrayList<String>();
+    SharedPreferences sharedPref;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-        //Load the UI elements and listeners
-        Context context = getApplicationContext();
-        loadUI(context);
+        //Get the Shared Preferences file
+        context = getApplicationContext();
+        sharedPref = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        //Clean the Shared Preferences before starting a new game
+        context.getSharedPreferences(getString(R.string.preference_file_key), 0)
+                .edit().clear().apply();
+
+        //Load the UI elements
+        loadUI();
+
+        //Set the listeners
+        setListeners(context);
     }
 
-    public void loadUI(final Context context){
+    public void loadUI(){
         //Find the elements
         addPlayer = (Button) findViewById(R.id.addPlayer);
         next = (Button) findViewById(R.id.next);
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+    }
 
+    public void setListeners(final Context context) {
         //Listeners
         addPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -66,15 +78,18 @@ public class PlayerActivity extends ActivityMel {
                 //Get the name of all the players checking the childrens of the container
                 for(int index=0; index<linearLayout.getChildCount(); ++index) {
                     EditText nextChild = (EditText) linearLayout.getChildAt(index);
-                    players.add(nextChild.getText().toString());
+                    createPlayerInTable(nextChild.getText().toString());
                 }
 
-                //Set players in the intent and start new activity
-                i.putExtra("PLAYERS", players);
+                //Start new activity
                 startActivity(i);
             }
         });
-
     }
 
+    public void createPlayerInTable(String player){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(player, 0);
+        editor.commit();
+    }
 }
