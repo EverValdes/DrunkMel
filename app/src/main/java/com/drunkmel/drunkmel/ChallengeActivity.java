@@ -70,9 +70,6 @@ public class ChallengeActivity extends ActivityMel {
         setContentView(R.layout.activity_challenge);
         carousel = (RecyclerView) findViewById(R.id.carousel);
         setUpCarousel();
-
-        configureChallenges();
-
     }
 
     private void setUpCarousel() {
@@ -85,24 +82,6 @@ public class ChallengeActivity extends ActivityMel {
         carousel.setLayoutManager(llm);
     }
 
-    private void configureChallenges() {
-
-
-
-        /*LayoutInflater inflater = getLayoutInflater();
-        for(int i = 0; i < challenges.size(); i++){
-            challenge = (LinearLayout) inflater.inflate(R.layout.challenge, null);
-            //Configuring challenge from model
-            ChallengeModel challengeModel = challenges.get(i);
-            TextView title = (TextView) challenge.findViewById(R.id.title);
-            TextView description = (TextView) challenge.findViewById(R.id.description);
-
-            title.setText(challengeModel.getTitle());
-            description.setText(challengeModel.getDescription());
-
-            carousel.addView(challenge);
-        }*/
-    }
 
     private void createDataModel(JSONArray jsonArray){
         for (int i = 0; i < jsonArray.length(); i++) {
