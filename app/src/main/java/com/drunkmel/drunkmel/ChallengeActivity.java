@@ -1,6 +1,7 @@
 package com.drunkmel.drunkmel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.SnapHelper;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +37,9 @@ public class ChallengeActivity extends ActivityMel {
     ArrayList<String> players = new ArrayList<>();
     LinearLayoutManager llm;
     LinearLayout selectionButtons;
+    Button pass;
+    Button fail;
+    SharedPreferences sharedPref;
 
     //Layout
     RecyclerView carousel;
@@ -72,8 +77,27 @@ public class ChallengeActivity extends ActivityMel {
     private void loadUI() {
         setContentView(R.layout.activity_challenge);
         selectionButtons = (LinearLayout) findViewById(R.id.selectionButtons);
+        pass = (Button) findViewById(R.id.pass);
+        fail = (Button) findViewById(R.id.fail);
         carousel = (RecyclerView) findViewById(R.id.carousel);
         setUpCarousel();
+
+        //Listeners
+        pass.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO Add points to the player
+                Intent i = new Intent(ChallengeActivity.this, ChallengeActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //Listeners
+        fail.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(ChallengeActivity.this, ChallengeActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void setUpCarousel() {
@@ -85,7 +109,7 @@ public class ChallengeActivity extends ActivityMel {
         llm.scrollToPosition(circularChallengeArrayAdapter.getItemCount()/2);
         carousel.setLayoutManager(llm);
 
-
+        //Snap Helper to avoid having two challenges in the scrren
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(carousel);
 
