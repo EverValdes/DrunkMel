@@ -43,4 +43,6 @@ public class CircularChallengeArrayAdapter extends RecyclerView.Adapter<Challeng
         return Integer.MAX_VALUE;
     }
 
+    public int getRealItemCount() {return challenges.size(); }
+
 }

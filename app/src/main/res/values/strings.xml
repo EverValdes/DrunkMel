@@ -15,4 +15,8 @@
     <string name="next">SIGUIENTE</string>
     <string name="newPlayerHint">Nuevo jugador</string>
 
+    //Challenge Activity
+    <string name="pass">MEL</string>
+    <string name="fail">MAL</string>
+
 </resources>

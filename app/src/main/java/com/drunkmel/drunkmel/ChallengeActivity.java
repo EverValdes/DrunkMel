@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
-import android.widget.ArrayAdapter;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.SnapHelper;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.RecyclerView;
 
@@ -23,6 +23,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+
 public class ChallengeActivity extends ActivityMel {
     //Challenges that need to be recorded into singleton/database
     private ArrayList<ChallengeModel> challenges = new ArrayList<ChallengeModel>();
@@ -31,10 +33,11 @@ public class ChallengeActivity extends ActivityMel {
     Context context;
     private CircularChallengeArrayAdapter circularChallengeArrayAdapter;
     ArrayList<String> players = new ArrayList<>();
+    LinearLayoutManager llm;
+    LinearLayout selectionButtons;
 
     //Layout
     RecyclerView carousel;
-    LinearLayout challenge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,20 +71,62 @@ public class ChallengeActivity extends ActivityMel {
 
     private void loadUI() {
         setContentView(R.layout.activity_challenge);
+        selectionButtons = (LinearLayout) findViewById(R.id.selectionButtons);
         carousel = (RecyclerView) findViewById(R.id.carousel);
         setUpCarousel();
     }
 
     private void setUpCarousel() {
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         circularChallengeArrayAdapter = new CircularChallengeArrayAdapter(this, challenges);
         carousel.setAdapter(circularChallengeArrayAdapter);
         //Star on the middle of the challenges
         llm.scrollToPosition(circularChallengeArrayAdapter.getItemCount()/2);
         carousel.setLayoutManager(llm);
-    }
 
+
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(carousel);
+
+
+        carousel.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == SCROLL_STATE_IDLE) {
+
+                    //Disable the touch when the scrolling ends
+                    recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+                        @Override
+                        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                            return true;
+                        }
+                        @Override
+                        public void onTouchEvent(RecyclerView rv, MotionEvent e) {}
+                        @Override
+                        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
+                    });
+
+                    selectionButtons.setVisibility(View.VISIBLE);
+
+                    /* No idea how to make this works, it seems more elegant
+                    llm = new LinearLayoutManager(context) {
+                        @Override
+                        public boolean canScrollHorizontally() {
+                            return false;
+                        }
+                    };
+                    llm.setOrientation(LinearLayoutManager.HORIZONTAL);
+                    recyclerView.setLayoutManager(llm);
+                    */
+                }
+            }
+        });
+
+
+
+    }
 
     private void createDataModel(JSONArray jsonArray){
         for (int i = 0; i < jsonArray.length(); i++) {

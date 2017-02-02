@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:background="@drawable/challenge_icon"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/challenge">
         <TextView
             android:id="@+id/title"
             android:text="Challenge title"
@@ -13,7 +14,7 @@
             android:scrollHorizontally="true"
             android:inputType="textMultiLine"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent" />
+            android:layout_width="320dp" />
 
         <TextView
             android:id="@+id/description"
@@ -23,6 +24,6 @@
             android:scrollHorizontally="true"
             android:inputType="textMultiLine"
             android:text="Challenge description"
-            android:layout_width="match_parent"
+            android:layout_width="320dp"
             android:layout_height="wrap_content" />
 </LinearLayout>
