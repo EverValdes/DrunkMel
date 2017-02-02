@@ -32,13 +32,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/pass"/>
+            android:text="@string/pass"
+            android:id="@+id/pass"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/fail"/>
+            android:text="@string/fail"
+            android:id="@+id/fail"/>
 
     </LinearLayout>
 

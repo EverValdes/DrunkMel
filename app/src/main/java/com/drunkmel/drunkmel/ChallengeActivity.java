@@ -109,17 +109,6 @@ public class ChallengeActivity extends ActivityMel {
                     });
 
                     selectionButtons.setVisibility(View.VISIBLE);
-
-                    /* No idea how to make this works, it seems more elegant
-                    llm = new LinearLayoutManager(context) {
-                        @Override
-                        public boolean canScrollHorizontally() {
-                            return false;
-                        }
-                    };
-                    llm.setOrientation(LinearLayoutManager.HORIZONTAL);
-                    recyclerView.setLayoutManager(llm);
-                    */
                 }
             }
         });
