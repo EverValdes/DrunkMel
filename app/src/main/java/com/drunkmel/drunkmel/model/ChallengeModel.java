@@ -1,5 +1,8 @@
 package com.drunkmel.drunkmel.model;
 
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+
 import com.drunkmel.drunkmel.interfaces.DataModel;
 
 import java.io.Serializable;
@@ -13,11 +16,13 @@ public class ChallengeModel implements DataModel {
     protected String description;
 
     public ChallengeModel(String title, String description) {
+
         this.title = title;
         this.description = description;
     }
 
-    public ChallengeModel(){};
+    public ChallengeModel(){
+    };
 
     public String getDescription() {
         return description;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="@drawable/challenge_icon"
+    android:orientation="vertical">
+        <TextView
+            android:id="@+id/title"
+            android:text="Challenge title"
+            android:textSize="@dimen/activity_tittle"
+            android:gravity="center_horizontal|center_vertical"
+            android:scrollHorizontally="true"
+            android:inputType="textMultiLine"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_below="@+id/title"
+            android:textSize="@dimen/activity_tittle"
+            android:gravity="center_horizontal|center_vertical"
+            android:scrollHorizontally="true"
+            android:inputType="textMultiLine"
+            android:text="Challenge description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+</LinearLayout>
