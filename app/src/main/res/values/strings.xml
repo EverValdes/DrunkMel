@@ -5,7 +5,10 @@
     <string name="preference_file_key">com.drunkmel.drunkmel.PLAYERS_TABLE</string>
 
     <!--Home Activity-->
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     <string name="penaltyButton">CASTIGOS</string>
     <string name="challengeButton">DESAFÍOS</string>
     <string name="questionButton">PREGUNTAS</string>

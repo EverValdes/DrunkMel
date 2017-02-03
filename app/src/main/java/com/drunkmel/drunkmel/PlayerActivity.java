@@ -12,16 +12,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+<<<<<<< HEAD
 import org.apache.commons.lang3.StringUtils;
+=======
+>>>>>>> origin/master
 import android.widget.TextView;
 
 public class PlayerActivity extends ActivityMel {
 
     //Variabes declaration
+<<<<<<< HEAD
     Button addPlayerButton;
     Button nextButton;
     LinearLayout playerItem;
 
+=======
+    TextView playerLabel;
+    Typeface custom_font;
+    Button addPlayer;
+    Button next;
+    LinearLayout linearLayout;
+>>>>>>> origin/master
     SharedPreferences sharedPref;
     Context context;
 
@@ -52,12 +63,21 @@ public class PlayerActivity extends ActivityMel {
 
     public void loadUI(){
         //Find the elements
+<<<<<<< HEAD
         addPlayerButton = (Button) findViewById(R.id.addPlayer);
         nextButton = (Button) findViewById(R.id.next);
         enableButton(nextButton, false);
         playerItem = (LinearLayout) findViewById(R.id.playerItem);
 
 
+=======
+        playerLabel = (TextView) findViewById(R.id.playerLabel);
+        custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Frijole-Regular.ttf");
+        playerLabel.setTypeface(custom_font);
+        addPlayer = (Button) findViewById(R.id.addPlayer);
+        next = (Button) findViewById(R.id.next);
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+>>>>>>> origin/master
     }
 
     public void setListeners(final Context context) {
@@ -86,6 +106,7 @@ public class PlayerActivity extends ActivityMel {
                 playerName.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT));
+<<<<<<< HEAD
                 playerName.setFocusableInTouchMode(true);
                 playerName.requestFocus();
                 playerName.setHint(R.string.newPlayerHint);
@@ -93,6 +114,14 @@ public class PlayerActivity extends ActivityMel {
                 playerName.setTextColor(Color.BLACK);
                 playerItem.addView(playerName);
 
+=======
+                playerItem.setFocusableInTouchMode(true);
+                playerItem.requestFocus();
+                playerItem.setHint(R.string.newPlayerHint);
+                playerItem.setHintTextColor(Color.WHITE);
+                playerItem.setTextColor(Color.WHITE);
+                linearLayout.addView(playerItem);
+>>>>>>> origin/master
             }
         });
 
