@@ -1,0 +1,40 @@
+{
+  "penalties": [
+    {
+      "title": "The only son challenge",
+      "description": "All only sons have to drink from the beverage of the one on their right side"
+    },
+    {
+      "title": "Screw you Papu",
+      "description": "All papus have to drink"
+    },
+    {
+      "title": "Too young to be here",
+      "description": "The youngest have to drink"
+    },
+    {
+      "title": "The A for the E",
+      "description": "The one on your left says a statement, which you have to repeat replacing all As for Es"
+    },
+    {
+      "title": "The last clap",
+      "description": "The one that claps at last have to drink"
+    },
+    {
+      "title": "Ban a word",
+      "description": "Choose a word to be banned, if one says it, then one has to drink"
+    },
+    {
+      "title": "Shame on you",
+      "description": "Pick up two people, which have to drink"
+    },
+    {
+      "title": "There's a whole in my cup",
+      "description": "You have to drink half of the cup"
+    },
+    {
+      "title": "Swinger on dutty",
+      "description": "Exchange cups with the one on your left"
+    }
+  ]
+}
