@@ -5,6 +5,8 @@
     <string name="preference_file_key">com.drunkmel.drunkmel.PLAYERS_TABLE</string>
 
     <!--Home Activity-->
+
+    <string name="penaltyButton">CASTIGOS</string>
     <string name="challengeButton">DESAFÍOS</string>
     <string name="questionButton">PREGUNTAS</string>
     <string name="homeTitle">¡Selecciona tipo de juego!</string>
@@ -19,7 +21,15 @@
     <string name="pass">MEL</string>
     <string name="fail">MAL</string>
 
+    <!--Penalty Activity-->
+    <string name="nextTurn">SIGUIENTE</string>
+    <string name="end">FINALIZAR</string>
+
     <!--Challenge holder-->
     <string name="punishmentBoldInCarousel">Castigo: </string>
+    
+    <!--Result Activity-->
+    <string name="resultTitle">Resultados finales</string>
+    <string name="playAgain">Jugar de nuevo</string>
 
 </resources>

@@ -87,6 +87,7 @@ public class ChallengeActivity extends ActivityMel {
                 //TODO Add points to the player
                 Intent i = new Intent(ChallengeActivity.this, ChallengeActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -95,6 +96,7 @@ public class ChallengeActivity extends ActivityMel {
             public void onClick(View v) {
                 Intent i = new Intent(ChallengeActivity.this, ChallengeActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

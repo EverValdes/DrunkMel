@@ -28,15 +28,14 @@
         android:layout_below="@id/carousel"
         android:orientation="vertical"
         android:visibility="gone"
+        android:gravity="center"
         android:id="@+id/selectionButtons">
         <Button
-            android:layout_width="match_parent"
             android:text="@string/nextTurn"
             android:id="@+id/nextTurn"
             style="@style/HomeButton"/>
 
         <Button
-            android:layout_width="match_parent"
             android:text="@string/end"
             android:id="@+id/end"
             style="@style/HomeButton"/>

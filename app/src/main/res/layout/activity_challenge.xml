@@ -28,15 +28,14 @@
         android:layout_below="@id/carousel"
         android:orientation="vertical"
         android:visibility="gone"
-        android:id="@+id/selectionButtons">
+        android:id="@+id/selectionButtons"
+        android:gravity="center">
         <Button
-            android:layout_width="match_parent"
             android:text="@string/pass"
             android:id="@+id/pass"
             style="@style/HomeButton"/>
 
         <Button
-            android:layout_width="match_parent"
             android:text="@string/fail"
             android:id="@+id/fail"
             style="@style/HomeButton"/>

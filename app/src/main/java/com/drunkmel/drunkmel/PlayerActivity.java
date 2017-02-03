@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import org.apache.commons.lang3.StringUtils;
+import android.widget.TextView;
 
 public class PlayerActivity extends ActivityMel {
 
@@ -20,6 +21,7 @@ public class PlayerActivity extends ActivityMel {
     Button addPlayerButton;
     Button nextButton;
     LinearLayout playerItem;
+
     SharedPreferences sharedPref;
     Context context;
 
@@ -54,6 +56,8 @@ public class PlayerActivity extends ActivityMel {
         nextButton = (Button) findViewById(R.id.next);
         enableButton(nextButton, false);
         playerItem = (LinearLayout) findViewById(R.id.playerItem);
+
+
     }
 
     public void setListeners(final Context context) {
@@ -88,6 +92,7 @@ public class PlayerActivity extends ActivityMel {
                 playerName.setHintTextColor(Color.GRAY);
                 playerName.setTextColor(Color.BLACK);
                 playerItem.addView(playerName);
+
             }
         });
 
