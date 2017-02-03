@@ -27,4 +27,15 @@
             android:text="Challenge description"
             android:layout_width="320dp"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/punishment"
+            android:layout_below="@+id/description"
+            android:textSize="@dimen/activity_tittle"
+            android:gravity="center_horizontal"
+            android:scrollHorizontally="true"
+            android:inputType="textMultiLine"
+            android:text="Challenge penalty"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content" />
 </LinearLayout>

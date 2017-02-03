@@ -33,7 +33,7 @@ public class ResourceGetter {
      *
      * Example:
      * Trying to get the id of a resource from drawable getResourceId("icon", "drawable", getPackageName())
-     * Trying to get the id of a string resource  getResourceId("appName", "string", getPackageName())
+     * Trying to get the id of a string resource  getResourceId("appName", "strings", getPackageName())
      */
     /* (accept a raw type for API compatibility) */
     public  int getResourceId(String variableName, String resourceName, String packageName)    {

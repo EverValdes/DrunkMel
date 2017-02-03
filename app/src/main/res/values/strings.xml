@@ -1,27 +1,30 @@
 <resources>
     <string name="app_name">DrunkMel</string>
 
-    //Shared preference file
+    <!--Shared preference file-->
     <string name="preference_file_key">com.drunkmel.drunkmel.PLAYERS_TABLE</string>
 
-    //Home Activity
+	<!--Home Activity-->
     <string name="penaltyButton">CASTIGOS</string>
     <string name="challengeButton">DESAFÍOS</string>
     <string name="questionButton">PREGUNTAS</string>
     <string name="homeTitle">Seleccione el tipo de juego:</string>
 
-    //Player Activity
+    <!--Player Activity-->
     <string name="playersLabel">Agrega jugadores!</string>
     <string name="addPlayer">NUEVO JUGADOR</string>
     <string name="next">SIGUIENTE</string>
     <string name="newPlayerHint">Nuevo jugador</string>
 
-    //Challenge Activity
+    <!--Challenge Activity-->
     <string name="pass">MEL</string>
     <string name="fail">MAL</string>
 
-    //Penalty Activity
+    <!--Penalty Activity-->
     <string name="nextTurn">SIGUIENTE</string>
     <string name="end">FINALIZAR</string>
+    
+    <!--Challenge holder-->
+    <string name="punishmentBoldInCarousel">Castigo: </string>
 
 </resources>
