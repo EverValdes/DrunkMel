@@ -5,7 +5,7 @@
         <item name="android:layout_height">35dp</item>
         <item name="android:layout_marginBottom">15dp</item>
         <item name="android:textColor">#fff</item>
-        <item name="android:background">@drawable/homebutton</item>
+        <item name="android:background">@drawable/wood_sign</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:textSize">25dp</item>
     </style>
