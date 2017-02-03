@@ -35,7 +35,6 @@ public class ChallengeActivity extends ActivityMel {
     Context context;
     private CircularChallengeArrayAdapter circularChallengeArrayAdapter;
     ArrayList<String> players = new ArrayList<>();
-    LinearLayoutManager llm;
     LinearLayout selectionButtons;
     Button pass;
     Button fail;
@@ -101,7 +100,11 @@ public class ChallengeActivity extends ActivityMel {
     }
 
     private void setUpCarousel() {
-        llm = new LinearLayoutManager(this);
+        //Snap Helper to avoid having two challenges in the scrren
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(carousel);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         circularChallengeArrayAdapter = new CircularChallengeArrayAdapter(this, challenges);
         carousel.setAdapter(circularChallengeArrayAdapter);
@@ -109,12 +112,7 @@ public class ChallengeActivity extends ActivityMel {
         llm.scrollToPosition(circularChallengeArrayAdapter.getItemCount()/2);
         carousel.setLayoutManager(llm);
 
-        //Snap Helper to avoid having two challenges in the scrren
-        SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(carousel);
-
-
-        carousel.addOnScrollListener(new RecyclerView.OnScrollListener() {
+       carousel.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -136,9 +134,6 @@ public class ChallengeActivity extends ActivityMel {
                 }
             }
         });
-
-
-
     }
 
     private void createDataModel(JSONArray jsonArray){
@@ -154,6 +149,8 @@ public class ChallengeActivity extends ActivityMel {
                         case "title": challengeModel.setTitle(value);
                             break;
                         case "description": challengeModel.setDescription(value);
+                            break;
+                        case "punishment": challengeModel.setPunishment(value);
                             break;
                     }
                 }

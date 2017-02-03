@@ -14,9 +14,9 @@ import java.io.Serializable;
 public class ChallengeModel implements DataModel {
     protected String title;
     protected String description;
+    protected String punishment;
 
-    public ChallengeModel(String title, String description) {
-
+    public ChallengeModel(String title, String description, String penalty) {
         this.title = title;
         this.description = description;
     }
@@ -40,5 +40,11 @@ public class ChallengeModel implements DataModel {
         this.title = title;
     }
 
+    public String getPenalty() {
+        return punishment;
+    }
 
+    public void setPunishment(String punishment) {
+        this.punishment = punishment;
+    }
 }
