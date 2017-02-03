@@ -1,7 +1,10 @@
 package com.drunkmel.drunkmel.helpers;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +40,11 @@ public class CircularPenaltyArrayAdapter extends RecyclerView.Adapter<ChallengeV
     public void onBindViewHolder(ChallengeViewHolder penaltyViewHolder, int position) {
         PenaltyModel penaltyModel = penalties.get(position % penalties.size());
         penaltyViewHolder.getTitle().setText(penaltyModel.getTitle());
+
+        SpannableString spanString = new SpannableString(penaltyViewHolder.getTitle().getText());
+        spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
+        penaltyViewHolder.getTitle().setText(spanString);
+
         penaltyViewHolder.getDescription().setText(penaltyModel.getDescription());
     }
 

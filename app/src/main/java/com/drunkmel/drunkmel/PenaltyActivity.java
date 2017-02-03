@@ -65,14 +65,14 @@ public class PenaltyActivity extends ActivityMel {
             public void onClick(View v) {
                 Intent i = new Intent(PenaltyActivity.this, PenaltyActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
         //Listeners
         end.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(PenaltyActivity.this, HomeActivity.class);
-                startActivity(i);
+                finish();
             }
         });
     }
