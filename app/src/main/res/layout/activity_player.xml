@@ -24,7 +24,8 @@
             android:layout_marginBottom="16dp"
             android:textSize="@dimen/activity_tittle"
             android:textColor="#000"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="center_horizontal"/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -40,16 +41,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <Button
-            android:layout_width="match_parent"
             android:text="@string/addPlayer"
             android:id="@+id/addPlayer"
             style="@style/HomeButton"/>
 
         <Button
-            android:layout_width="match_parent"
             android:text="@string/next"
             android:id="@+id/next"
             style="@style/HomeButton"/>

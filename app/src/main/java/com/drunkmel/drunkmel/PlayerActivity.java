@@ -4,15 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class PlayerActivity extends ActivityMel {
 
     //Variabes declaration
+    TextView playerLabel;
+    Typeface custom_font;
     Button addPlayer;
     Button next;
     LinearLayout linearLayout;
@@ -41,6 +45,9 @@ public class PlayerActivity extends ActivityMel {
 
     public void loadUI(){
         //Find the elements
+        playerLabel = (TextView) findViewById(R.id.playerLabel);
+        custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Frijole-Regular.ttf");
+        playerLabel.setTypeface(custom_font);
         addPlayer = (Button) findViewById(R.id.addPlayer);
         next = (Button) findViewById(R.id.next);
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
@@ -58,8 +65,8 @@ public class PlayerActivity extends ActivityMel {
                 playerItem.setFocusableInTouchMode(true);
                 playerItem.requestFocus();
                 playerItem.setHint(R.string.newPlayerHint);
-                playerItem.setHintTextColor(Color.GRAY);
-                playerItem.setTextColor(Color.BLACK);
+                playerItem.setHintTextColor(Color.WHITE);
+                playerItem.setTextColor(Color.WHITE);
                 linearLayout.addView(playerItem);
             }
         });
@@ -83,6 +90,7 @@ public class PlayerActivity extends ActivityMel {
 
                 //Start new activity
                 startActivity(i);
+                finish();
             }
         });
     }

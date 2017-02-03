@@ -19,7 +19,8 @@
         <activity android:name=".ChallengeActivity" />
         <activity android:name=".ActivityMel" />
         <activity android:name=".QuestionActivity" />
-        <activity android:name=".PenaltyActivity"></activity>
+        <activity android:name=".PenaltyActivity" />
+        <activity android:name=".ResultActivity"></activity>
     </application>
 
 </manifest>

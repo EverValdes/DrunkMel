@@ -4,7 +4,7 @@
     <!--Shared preference file-->
     <string name="preference_file_key">com.drunkmel.drunkmel.PLAYERS_TABLE</string>
 
-	<!--Home Activity-->
+    <!--Home Activity-->
     <string name="penaltyButton">CASTIGOS</string>
     <string name="challengeButton">DESAFÍOS</string>
     <string name="questionButton">PREGUNTAS</string>
@@ -23,8 +23,12 @@
     <!--Penalty Activity-->
     <string name="nextTurn">SIGUIENTE</string>
     <string name="end">FINALIZAR</string>
-    
+
     <!--Challenge holder-->
     <string name="punishmentBoldInCarousel">Castigo: </string>
+    
+    <!--Result Activity-->
+    <string name="resultTitle">Resultados finales</string>
+    <string name="playAgain">Jugar de nuevo</string>
 
 </resources>
