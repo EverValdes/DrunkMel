@@ -8,7 +8,7 @@
     <string name="penaltyButton">CASTIGOS</string>
     <string name="challengeButton">DESAFÍOS</string>
     <string name="questionButton">PREGUNTAS</string>
-    <string name="homeTitle">Seleccione el tipo de juego:</string>
+    <string name="homeTitle">¡Selecciona tipo de juego!</string>
 
     <!--Player Activity-->
     <string name="playersLabel">Agrega jugadores!</string>

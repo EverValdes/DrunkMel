@@ -1,40 +1,40 @@
 {
   "penalties": [
     {
-      "title": "The only son challenge",
-      "description": "All only sons have to drink from the beverage of the one on their right side"
+      "title": "Hijo único jeje!",
+      "description": "Todos los hijos únicos tienen que tomar de la bebida de la persona a su derecha"
     },
     {
       "title": "Screw you Papu",
-      "description": "All papus have to drink"
+      "description": "Todos los Papus tienen que tomar"
     },
     {
-      "title": "Too young to be here",
-      "description": "The youngest have to drink"
+      "title": "Muy joven para esto",
+      "description": "El más joven del grupo tiene que tomar"
     },
     {
-      "title": "The A for the E",
-      "description": "The one on your left says a statement, which you have to repeat replacing all As for Es"
+      "title": "Cambiando vocales",
+      "description": "La persona a tu derecha dice una oración, vos repetila cambiando las letras A por las E"
     },
     {
-      "title": "The last clap",
-      "description": "The one that claps at last have to drink"
+      "title": "El último aplauso",
+      "description": "El que aplauda último tiene que tomar"
     },
     {
-      "title": "Ban a word",
-      "description": "Choose a word to be banned, if one says it, then one has to drink"
+      "title": "Tabú",
+      "description": "Elige una palabra, la persona que la diga tiene que tomar"
     },
     {
-      "title": "Shame on you",
-      "description": "Pick up two people, which have to drink"
+      "title": "Que verguenza...",
+      "description": "Elige a alguien para que tome"
     },
     {
-      "title": "There's a whole in my cup",
-      "description": "You have to drink half of the cup"
+      "title": "Hay una perdida en mi vaso",
+      "description": "Tenes que tomar la mitad de tu vaso"
     },
     {
-      "title": "Swinger on dutty",
-      "description": "Exchange cups with the one on your left"
+      "title": "Chachooooo va",
+      "description": "Cambien todos los tragos con la persona de la izquierda"
     }
   ]
 }

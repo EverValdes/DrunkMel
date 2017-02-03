@@ -1,16 +1,20 @@
 package com.drunkmel.drunkmel;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class HomeActivity extends ActivityMel {
     private Button penaltyButton;
     private Button challengeButton;
     private Button questionButton;
     private Intent playerIntent;
+    private TextView homeTitle;
+    private Typeface custom_font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,10 @@ public class HomeActivity extends ActivityMel {
     }
 
     private void loadUI() {
+        homeTitle = (TextView) findViewById(R.id.homeTitle);
+        custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Frijole-Regular.ttf");
+        homeTitle.setTypeface(custom_font);
+
         penaltyButton = (Button) findViewById(R.id.penaltyButton);
         penaltyButton.setOnClickListener(new OnClickListener(){
             @Override
