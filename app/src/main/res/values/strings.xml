@@ -2,7 +2,9 @@
     <string name="app_name">DrunkMel</string>
 
     <!--Shared preference file-->
-    <string name="preference_file_key">com.drunkmel.drunkmel.PLAYERS_TABLE</string>
+    <string name="preference_file_players_list">com.drunkmel.drunkmel.PLAYERS_TABLE</string>
+    <string name="preference_file_players_score">com.drunkmel.drunkmel.PLAYERS_SCORE</string>
+    <string name="preference_file_players_turns">com.drunkmel.drunkmel.PLAYER_TURN</string>
 
     <!--Home Activity-->
     <string name="penaltyButton">CASTIGOS</string>

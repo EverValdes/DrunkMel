@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,33 +15,50 @@ import android.widget.TextView;
 
 public class PlayerActivity extends ActivityMel {
 
-    //Variabes declaration
-    TextView playerLabel;
-    Typeface custom_font;
-    Button addPlayer;
-    Button next;
-    LinearLayout linearLayout;
-    SharedPreferences sharedPref;
-    Context context;
+    private TextView playerLabel;
+    private Typeface custom_font;
+    private Button addPlayer, next;
+    private LinearLayout linearLayout;
+    private SharedPreferences sp_PlayerList, sp_PlayerScore, sp_PlayerTurn;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-        //Get the Shared Preferences file
-        context = getApplicationContext();
-        sharedPref = context.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        //Clean the Shared Preferences before starting a new game
-        context.getSharedPreferences(getString(R.string.preference_file_key), 0)
-                .edit().clear().apply();
+        // Create shared Preferences file to manage the players score and turn.
+        createSharedPreferences();
 
-        //Load the UI elements
+        // Load the UI elements
         loadUI();
 
-        //Set the listeners
+        // Set the listeners
         setListeners(context);
+    }
+
+    public void createSharedPreferences() {
+        context = getApplicationContext();
+
+        // Creating new Shared Preferences file for players list
+        sp_PlayerList = context.getSharedPreferences(
+                getString(R.string.preference_file_players_list), Context.MODE_PRIVATE);
+
+        // Creating new Shared Preferences file for players score
+        sp_PlayerScore = context.getSharedPreferences(
+                getString(R.string.preference_file_players_score), Context.MODE_PRIVATE);
+
+        // Creating new Shared Preferences file for players turn
+        sp_PlayerTurn = context.getSharedPreferences(
+                getString(R.string.preference_file_players_turns), Context.MODE_PRIVATE);
+
+        // Clean all the Shared Preferences before starting a new game
+        context.getSharedPreferences(getString(R.string.preference_file_players_list), 0)
+                .edit().clear().apply();
+        context.getSharedPreferences(getString(R.string.preference_file_players_score), 0)
+                .edit().clear().apply();
+        context.getSharedPreferences(getString(R.string.preference_file_players_turns), 0)
+                .edit().clear().apply();
     }
 
     public void loadUI(){
@@ -75,29 +93,46 @@ public class PlayerActivity extends ActivityMel {
             public void onClick(View v) {
                 //Get data from previous intent and create a new one depending the game mode
                 String gameMode = getIntent().getExtras().getString("GAME_MODE");
+                String lastPlayer="";
+                int index;
                 Intent i;
-                if(gameMode.equalsIgnoreCase("challenge")) {
+                if (gameMode.equalsIgnoreCase("challenge")) {
                     i = new Intent(context, ChallengeActivity.class);
                 } else {
                     i = new Intent(context, QuestionActivity.class);
                 }
 
-                //Get the name of all the players checking the childrens of the container
-                for(int index=0; index<linearLayout.getChildCount(); ++index) {
+                //Get the name of all the players checking the children of the container
+                for(index=0; index<linearLayout.getChildCount(); ++index) {
                     EditText nextChild = (EditText) linearLayout.getChildAt(index);
-                    createPlayerInTable(nextChild.getText().toString());
-                }
 
-                //Start new activity
+                    setPlayerList(Integer.toString(index), nextChild.getText().toString());
+                    setPlayerScore(Integer.toString(index));
+
+                    if (index == 0) {
+                        setPlayerTurn("nextPlayer", nextChild.getText().toString());
+                    } else {
+                        lastPlayer = nextChild.getText().toString();
+                    }
+                }
+                // Set the last player to enable finalize button
+                setPlayerTurn("lastTurn", lastPlayer);
+
                 startActivity(i);
                 finish();
             }
         });
     }
 
-    public void createPlayerInTable(String player){
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(player, 0);
-        editor.commit();
+    public void setPlayerList(String id, String player) {
+        sp_PlayerList.edit().putString(id, player).commit();
+    }
+
+    public void setPlayerScore(String id) {
+        sp_PlayerScore.edit().putInt(id, 0).commit();
+    }
+
+    public void setPlayerTurn(String positionTurn, String playerName) {
+        sp_PlayerTurn.edit().putString(positionTurn, playerName).commit();
     }
 }
