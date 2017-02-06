@@ -6,21 +6,24 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class PlayerActivity extends ActivityMel {
 
     //Variabes declaration
     private TextView playerLabel;
     private Typeface custom_font;
-    private Button addPlayer;
-    private Button addPlayer, nextButton;
+    private Button addPlayerButton, nextButton;
     private LinearLayout playerItem;
-    private SharedPreferences sp_PlayerList;
+    private SharedPreferences sp_PlayerList, sp_PlayerScore, sp_PlayerTurn;
     private Context context;
 
     @Override
@@ -33,6 +36,7 @@ public class PlayerActivity extends ActivityMel {
 
         loadUI();
         setListeners(context);
+        setDefaultPlayers(1);
     }
 
     private void createSharedPreferences() {
@@ -64,9 +68,10 @@ public class PlayerActivity extends ActivityMel {
         playerLabel = (TextView) findViewById(R.id.playerLabel);
         custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Frijole-Regular.ttf");
         playerLabel.setTypeface(custom_font);
-        addPlayer = (Button) findViewById(R.id.addPlayer);
-        next = (Button) findViewById(R.id.next);
-        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        addPlayerButton = (Button) findViewById(R.id.addPlayer);
+        nextButton = (Button) findViewById(R.id.next);
+        playerItem = (LinearLayout) findViewById(R.id.playerItem);
+        enableButton(nextButton, false);
     }
 
     private void setListeners(final Context context) {
@@ -92,6 +97,9 @@ public class PlayerActivity extends ActivityMel {
                         configureNextButton();
                     }
                 });
+                playerName.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
                 playerName.setFocusableInTouchMode(true);
                 playerName.requestFocus();
                 playerName.setHint(R.string.newPlayerHint);
@@ -106,7 +114,6 @@ public class PlayerActivity extends ActivityMel {
                 //Get data from previous intent and create a new one depending the game mode
                 String gameMode = getIntent().getExtras().getString("GAME_MODE");
                 String lastPlayer="";
-                int index;
                 Intent i;
                 if(gameMode.equalsIgnoreCase("challenge")) {
                     i = new Intent(context, ChallengeActivity.class);
@@ -114,13 +121,19 @@ public class PlayerActivity extends ActivityMel {
                     i = new Intent(context, QuestionActivity.class);
                 }
 
-                //Get the name of all the players checking the childrens of the container
-                for(int index=0; index<linearLayout.getChildCount(); ++index) {
-                    EditText nextChild = (EditText) linearLayout.getChildAt(index);
-                    createPlayerInTable(nextChild.getText().toString());
+                //Get the name of all the players checking the children of the container
+                for(int index=0; index<playerItem.getChildCount(); ++index) {
+                    EditText nextChild = (EditText) playerItem.getChildAt(index);
+
+                    setPlayerList(Integer.toString(index), nextChild.getText().toString());
+                    setPlayerScore(Integer.toString(index));
+
+                    if (index == 0) {
+                        setPlayerTurn("nextPlayer", nextChild.getText().toString());
+                    } else {
+                        lastPlayer = nextChild.getText().toString();
+                    }
                 }
-                // Set the last player to enable finalize button
-                setPlayerTurn("lastTurn", lastPlayer);
 
                 //Start new activity
                 startActivity(i);
@@ -129,10 +142,38 @@ public class PlayerActivity extends ActivityMel {
         });
     }
 
-    public void createPlayerInTable(String player){
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(player, 0);
-        editor.commit();
+    private void setDefaultPlayers(int numberOfPlayers){
+        for (int i = 1; i<= numberOfPlayers; i++){
+            addPlayerButton.performClick();
+        }
+    }
+
+    private void configureNextButton() {
+        //All the fields for players into this activity
+        int amountOfPlayers = playerItem.getChildCount();
+        //If there are least than 2 players, don't enable the nextButton button
+        if (amountOfPlayers < 2) {
+            enableButton(nextButton, false);
+        } else {
+            for (int i = 0; i < amountOfPlayers; i++) {
+                EditText player = (EditText) playerItem.getChildAt(i);
+                if (StringUtils.isEmpty(player.getText())) {
+                    enableButton(nextButton, false);
+                    return;
+                } else {
+                    enableButton(nextButton, true);
+                }
+            }
+        }
+    }
+
+    private void enableButton(Button button, boolean enable) {
+        button.setEnabled(enable);
+        if (enable) {
+            button.setAlpha(1F);
+        } else {
+            button.setAlpha(0.7F);
+        }
     }
 
     private void setPlayerList(String id, String player) {
