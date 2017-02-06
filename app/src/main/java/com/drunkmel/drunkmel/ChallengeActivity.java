@@ -60,7 +60,7 @@ public class ChallengeActivity extends ActivityMel {
 
     private void configureSharedPreferencies() {
         SharedPreferences sharedPref = context.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                getString(R.string.preference_file_players_list), Context.MODE_PRIVATE);
         Map<String, ?> allEntries = sharedPref.getAll();
         int index = 0;
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
@@ -68,7 +68,7 @@ public class ChallengeActivity extends ActivityMel {
             index++;
         }
 
-        //Example to get values from the Shared Preferences - to be deleted
+        //Example to get values from the Shared Preferences - TODO delete this example
         int value = sharedPref.getInt(players.get(0), 25);
         Toast.makeText(context, players.get(0) + " " + value, Toast.LENGTH_LONG).show();
     }

@@ -1,14 +1,11 @@
 package com.drunkmel.drunkmel.loaders;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 
 import com.drunkmel.drunkmel.R;
 import com.drunkmel.drunkmel.helpers.ResourceGetter;
 import com.drunkmel.drunkmel.interfaces.DataModel;
 import com.drunkmel.drunkmel.interfaces.LoaderResource;
-import com.drunkmel.drunkmel.model.ChallengeModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,10 +13,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by everv on 1/26/2017.
@@ -74,5 +68,63 @@ public class JSONLoader implements LoaderResource {
             e.printStackTrace();
         }
         return jsonElementArray;
+    }
+
+    public String loadJSONFromRaw(Context context) {
+        String jsonString;
+        try {
+            InputStream is = context.getResources().openRawResource(getRandomQuestion());
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            jsonString = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return jsonString;
+    }
+
+    private int getRandomQuestion(){
+        Random r = new Random();
+        int jsonId;
+        int questionId = r.nextInt(10 - 1) + 1;
+
+        switch (questionId) {
+            case 1:
+                jsonId = R.raw.question1;
+                break;
+            case 2:
+                jsonId = R.raw.question2;
+                break;
+            case 3:
+                jsonId = R.raw.question3;
+                break;
+            case 4:
+                jsonId = R.raw.question4;
+                break;
+            case 5:
+                jsonId = R.raw.question5;
+                break;
+            case 6:
+                jsonId = R.raw.question6;
+                break;
+            case 7:
+                jsonId = R.raw.question7;
+                break;
+            case 8:
+                jsonId = R.raw.question8;
+                break;
+            case 9:
+                jsonId = R.raw.question9;
+                break;
+            case 10:
+                jsonId = R.raw.question10;
+                break;
+            default:
+                jsonId = R.raw.question1;
+        }
+        return jsonId;
     }
 }
