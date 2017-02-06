@@ -28,9 +28,16 @@
 
     <!--Challenge holder-->
     <string name="punishmentBoldInCarousel">Castigo: </string>
-    
-    <!--Result Activity-->
-    <string name="resultTitle">Resultados finales</string>
-    <string name="playAgain">Jugar de nuevo</string>
+
+    <!--Question Activity -->
+    <string name="turnOf">Turno de: </string>
+
+    <!--QuestionAnswer Activity -->
+    <string name="questionAnswerContinueButton">Continuar</string>
+    <string name="questionAnswerFinalizeButton">Finalizar</string>
+    <string name="questionAnswerTittle">Te salvaste, pasa el celular al siguiente jugador y cuando este listo presione continuar para responerder la siguiente pregunta</string>
+
+    <!--Score Activity-->
+    <string name="scoreTittle">Tabla de posiciones</string>
 
 </resources>
