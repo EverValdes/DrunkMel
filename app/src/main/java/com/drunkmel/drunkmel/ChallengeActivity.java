@@ -68,7 +68,7 @@ public class ChallengeActivity extends ActivityMel {
             index++;
         }
 
-        //Example to get values from the Shared Preferences - to be deleted
+        //Example to get values from the Shared Preferences - TODO delete this example
         int value = sharedPref.getInt(players.get(0), 25);
         Toast.makeText(context, players.get(0) + " " + value, Toast.LENGTH_LONG).show();
     }

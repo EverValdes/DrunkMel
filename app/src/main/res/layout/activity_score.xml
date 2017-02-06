@@ -22,7 +22,14 @@
         android:textStyle="bold"
         android:background="#80ffffff"
         android:padding="10dp"
-        android:text="@string/scoreTittle"/>
+        android:text="@string/scoreTittle"
+        android:layout_marginBottom="16dp"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resultsListView"
+        android:layout_below="@id/scoreTittle"/>
 
     <Button
         android:id="@+id/finalizeGame"
