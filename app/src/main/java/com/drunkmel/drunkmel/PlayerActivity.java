@@ -30,14 +30,10 @@ public class PlayerActivity extends ActivityMel {
         // Create shared Preferences file to manage the players score and turn.
         createSharedPreferences();
 
-        // Load the UI elements
         loadUI();
-
-        // Set the listeners
-        setListeners(context);
     }
 
-    public void createSharedPreferences() {
+    private void createSharedPreferences() {
         context = getApplicationContext();
 
         // Creating new Shared Preferences file for players list
@@ -61,7 +57,7 @@ public class PlayerActivity extends ActivityMel {
                 .edit().clear().apply();
     }
 
-    public void loadUI(){
+    private void loadUI(){
         //Find the elements
         playerLabel = (TextView) findViewById(R.id.playerLabel);
         custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Frijole-Regular.ttf");
@@ -69,9 +65,11 @@ public class PlayerActivity extends ActivityMel {
         addPlayer = (Button) findViewById(R.id.addPlayer);
         next = (Button) findViewById(R.id.next);
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+
+        setListeners(context);
     }
 
-    public void setListeners(final Context context) {
+    private void setListeners(final Context context) {
         //Listeners
         addPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -124,15 +122,15 @@ public class PlayerActivity extends ActivityMel {
         });
     }
 
-    public void setPlayerList(String id, String player) {
+    private void setPlayerList(String id, String player) {
         sp_PlayerList.edit().putString(id, player).commit();
     }
 
-    public void setPlayerScore(String id) {
+    private void setPlayerScore(String id) {
         sp_PlayerScore.edit().putInt(id, 0).commit();
     }
 
-    public void setPlayerTurn(String positionTurn, String playerName) {
+    private void setPlayerTurn(String positionTurn, String playerName) {
         sp_PlayerTurn.edit().putString(positionTurn, playerName).commit();
     }
 }
