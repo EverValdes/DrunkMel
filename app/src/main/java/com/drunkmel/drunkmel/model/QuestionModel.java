@@ -3,12 +3,13 @@ package com.drunkmel.drunkmel.model;
 import com.drunkmel.drunkmel.interfaces.DataModel;
 
 /**
- * Created by everv on 1/26/2017.
+ * Created by german.moyano on 1/26/2017.
  */
 
 public class QuestionModel implements DataModel {
-    private String title;
     private String description;
+    private String penalty;
+    private String topic;
 
     public String getDescription() {
         return description;
@@ -17,15 +18,19 @@ public class QuestionModel implements DataModel {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public String getTitle() {
-        return title;
+    public String getPenalty() {
+        return penalty;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPenalty(String penalty) {
+        this.penalty = penalty;
     }
 
+    public String getTopic() {
+        return topic;
+    }
 
-
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
 }

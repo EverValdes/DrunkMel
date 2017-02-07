@@ -10,8 +10,7 @@ import android.support.v7.widget.SnapHelper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 import android.support.v7.widget.RecyclerView;
 
 import com.drunkmel.drunkmel.helpers.CircularChallengeArrayAdapter;
@@ -32,16 +31,15 @@ public class ChallengeActivity extends ActivityMel {
     private ArrayList<ChallengeModel> challenges = new ArrayList<ChallengeModel>();
 
     //Variables
-    Context context;
+    private Context context;
     private CircularChallengeArrayAdapter circularChallengeArrayAdapter;
-    ArrayList<String> players = new ArrayList<>();
-    LinearLayout selectionButtons;
-    Button pass;
-    Button fail;
-    SharedPreferences sharedPref;
+    private Button pass, fail, endChallenge;
+    private SharedPreferences sp_PlayerTurn, sp_PlayerList, sp_PlayerScore;
+    private TextView challengeTitle;
+    private String idActualPlayerStr;
 
     //Layout
-    RecyclerView carousel;
+    private RecyclerView carousel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,39 +57,32 @@ public class ChallengeActivity extends ActivityMel {
     }
 
     private void configureSharedPreferencies() {
-        SharedPreferences sharedPref = context.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        Map<String, ?> allEntries = sharedPref.getAll();
-        int index = 0;
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            players.add(index, entry.getKey());
-            index++;
-        }
-
-        //Example to get values from the Shared Preferences - to be deleted
-        int value = sharedPref.getInt(players.get(0), 25);
-        Toast.makeText(context, players.get(0) + " " + value, Toast.LENGTH_LONG).show();
+        sp_PlayerTurn = context.getSharedPreferences(getString(R.string.preference_file_players_turns), Context.MODE_PRIVATE);
+        sp_PlayerList = context.getSharedPreferences(getString(R.string.preference_file_players_list), Context.MODE_PRIVATE);
+        sp_PlayerScore = context.getSharedPreferences(getString(R.string.preference_file_players_score), Context.MODE_PRIVATE);
     }
 
     private void loadUI() {
         setContentView(R.layout.activity_challenge);
-        selectionButtons = (LinearLayout) findViewById(R.id.selectionButtons);
         pass = (Button) findViewById(R.id.pass);
         fail = (Button) findViewById(R.id.fail);
+        endChallenge = (Button) findViewById(R.id.endChallenge);
         carousel = (RecyclerView) findViewById(R.id.carousel);
+        challengeTitle = (TextView) findViewById(R.id.challengeTittle);
+        challengeTitle.setText(getResources().getString(R.string.turnOf) + " " + getPlayerName());
         setUpCarousel();
 
         //Listeners
         pass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //TODO Add points to the player
+                int actualScore = sp_PlayerScore.getInt(getIdActualPlayer(), 0);
+                sp_PlayerScore.edit().putInt(getIdActualPlayer(), (actualScore + 1)).apply();
                 Intent i = new Intent(ChallengeActivity.this, ChallengeActivity.class);
                 startActivity(i);
                 finish();
             }
         });
 
-        //Listeners
         fail.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ChallengeActivity.this, ChallengeActivity.class);
@@ -99,6 +90,50 @@ public class ChallengeActivity extends ActivityMel {
                 finish();
             }
         });
+
+        endChallenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent finalizeInt = new Intent(ChallengeActivity.this, ScoreActivity.class);
+                startActivity(finalizeInt);
+                finish();
+            }
+        });
+    }
+
+    private String getPlayerName() {
+        return sp_PlayerTurn.getString("nextPlayer", null);
+    }
+
+    private String getIdActualPlayer() {
+        Map<String, ?> allEntries = sp_PlayerList.getAll();
+
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            if (entry.getValue().toString().equalsIgnoreCase(getPlayerName())) {
+                return entry.getKey();
+            }
+        }
+        return "";
+    }
+
+    private boolean isLastTurn() {
+        if (getPlayerName().equalsIgnoreCase(sp_PlayerTurn.getString("lastTurn", null))) {
+            return true;
+        }
+        return false;
+    }
+
+    private void setNextTurn() {
+        if (isLastTurn()) {
+            // The next turn will be the player with id = 0
+            sp_PlayerTurn.edit().putString("nextPlayer", sp_PlayerList.getString("0", null)).apply();
+            return;
+        }
+
+        idActualPlayerStr = getIdActualPlayer();
+        int idActualPlayer = Integer.parseInt(idActualPlayerStr);
+        String nextTurnId = String.valueOf(idActualPlayer + 1);
+        sp_PlayerTurn.edit().putString("nextPlayer",sp_PlayerList.getString(nextTurnId,null)).apply();
     }
 
     private void setUpCarousel() {
@@ -132,7 +167,11 @@ public class ChallengeActivity extends ActivityMel {
                         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
                     });
 
-                    selectionButtons.setVisibility(View.VISIBLE);
+                    pass.setVisibility(View.VISIBLE);
+                    fail.setVisibility(View.VISIBLE);
+                    endChallenge.setVisibility(View.VISIBLE);
+
+                    setNextTurn();
                 }
             }
         });
