@@ -7,6 +7,10 @@
     <string name="preference_file_players_turns">com.drunkmel.drunkmel.PLAYER_TURN</string>
 
     <!--Home Activity-->
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
     <string name="penaltyButton">CASTIGOS</string>
     <string name="challengeButton">DESAFÍOS</string>
     <string name="questionButton">PREGUNTAS</string>
