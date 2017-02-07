@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +15,11 @@ import android.widget.TextView;
 
 public class PlayerActivity extends ActivityMel {
 
-    //Variabes declaration
     private TextView playerLabel;
     private Typeface custom_font;
-    private Button addPlayer;
-    private Button addPlayer, nextButton;
-    private LinearLayout playerItem;
-    private SharedPreferences sp_PlayerList;
+    private Button addPlayer, next;
+    private LinearLayout linearLayout;
+    private SharedPreferences sp_PlayerList, sp_PlayerScore, sp_PlayerTurn;
     private Context context;
 
     @Override
@@ -28,11 +27,10 @@ public class PlayerActivity extends ActivityMel {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-// Create shared Preferences file to manage the players score and turn.
+        // Create shared Preferences file to manage the players score and turn.
         createSharedPreferences();
 
         loadUI();
-        setListeners(context);
     }
 
     private void createSharedPreferences() {
@@ -67,72 +65,61 @@ public class PlayerActivity extends ActivityMel {
         addPlayer = (Button) findViewById(R.id.addPlayer);
         next = (Button) findViewById(R.id.next);
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+
+        setListeners(context);
     }
 
     private void setListeners(final Context context) {
         //Listeners
-        addPlayerButton.setOnClickListener(new View.OnClickListener() {
+        addPlayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Creating a new edit text for a new player
-                EditText playerName = new EditText(context);
-                playerName.addTextChangedListener(new TextWatcher() {
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        configureNextButton();
-                    }
-                });
-                playerName.setFocusableInTouchMode(true);
-                playerName.requestFocus();
-                playerName.setHint(R.string.newPlayerHint);
-                playerName.setHintTextColor(Color.GRAY);
-                playerName.setTextColor(Color.BLACK);
-                playerItem.addView(playerName);
+                EditText playerItem = new EditText(context);
+                playerItem.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                playerItem.setFocusableInTouchMode(true);
+                playerItem.requestFocus();
+                playerItem.setHint(R.string.newPlayerHint);
+                playerItem.setHintTextColor(Color.WHITE);
+                playerItem.setTextColor(Color.WHITE);
+                linearLayout.addView(playerItem);
             }
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Get data from previous intent and create a new one depending the game mode
                 String gameMode = getIntent().getExtras().getString("GAME_MODE");
                 String lastPlayer="";
                 int index;
                 Intent i;
-                if(gameMode.equalsIgnoreCase("challenge")) {
+                if (gameMode.equalsIgnoreCase("challenge")) {
                     i = new Intent(context, ChallengeActivity.class);
                 } else {
                     i = new Intent(context, QuestionActivity.class);
                 }
 
-                //Get the name of all the players checking the childrens of the container
-                for(int index=0; index<linearLayout.getChildCount(); ++index) {
+                //Get the name of all the players checking the children of the container
+                for(index=0; index<linearLayout.getChildCount(); ++index) {
                     EditText nextChild = (EditText) linearLayout.getChildAt(index);
-                    createPlayerInTable(nextChild.getText().toString());
+
+                    setPlayerList(Integer.toString(index), nextChild.getText().toString());
+                    setPlayerScore(Integer.toString(index));
+
+                    if (index == 0) {
+                        setPlayerTurn("nextPlayer", nextChild.getText().toString());
+                    } else {
+                        lastPlayer = nextChild.getText().toString();
+                    }
                 }
                 // Set the last player to enable finalize button
                 setPlayerTurn("lastTurn", lastPlayer);
 
-                //Start new activity
                 startActivity(i);
                 finish();
             }
         });
-    }
-
-    public void createPlayerInTable(String player){
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(player, 0);
-        editor.commit();
     }
 
     private void setPlayerList(String id, String player) {
