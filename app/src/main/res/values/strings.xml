@@ -19,8 +19,8 @@
     <string name="newPlayerHint">Nuevo jugador</string>
 
     <!--Challenge Activity-->
-    <string name="pass">MEL</string>
-    <string name="fail">MAL</string>
+    <string name="pass">CUMPLIÓ</string>
+    <string name="fail">NO CUMPLIÓ</string>
 
     <!--Penalty Activity-->
     <string name="nextTurn">SIGUIENTE</string>

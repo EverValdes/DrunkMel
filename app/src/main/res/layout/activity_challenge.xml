@@ -11,11 +11,24 @@
     android:background="@drawable/background"
     tools:context="com.drunkmel.drunkmel.ChallengeActivity">
 
+    <TextView
+        android:id="@+id/challengeTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#80ffffff"
+        android:textSize="30dp"
+        android:padding="5dp"
+        android:textColor="#000"
+        android:textStyle="bold"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/carousel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_below="@id/challengeTittle"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
         android:layout_marginBottom="32dp">
 
@@ -27,17 +40,23 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/carousel"
         android:orientation="vertical"
-        android:visibility="gone"
         android:id="@+id/selectionButtons"
         android:gravity="center">
         <Button
             android:text="@string/pass"
             android:id="@+id/pass"
+            android:visibility="gone"
             style="@style/HomeButton"/>
 
         <Button
             android:text="@string/fail"
             android:id="@+id/fail"
+            android:visibility="gone"
+            style="@style/HomeButton"/>
+        <Button
+            android:text="@string/end"
+            android:id="@+id/endChallenge"
+            android:visibility="gone"
             style="@style/HomeButton"/>
 
     </LinearLayout>
