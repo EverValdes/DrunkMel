@@ -3,7 +3,6 @@ package com.drunkmel.drunkmel;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.Map;
 
-public class QuestionAnswerActivity extends AppCompatActivity {
+public class QuestionAnswerActivity extends ActivityMel {
 
     private SharedPreferences sp_PlayerList, sp_PlayerScore, sp_PlayerTurn;
     private Button continueButton, finalizeButton;
