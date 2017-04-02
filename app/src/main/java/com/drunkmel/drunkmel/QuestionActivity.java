@@ -2,12 +2,12 @@ package com.drunkmel.drunkmel;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.drunkmel.drunkmel.helpers.SharedPreferencesManager;
 import com.drunkmel.drunkmel.loaders.JSONLoader;
 
 import org.json.JSONException;
@@ -17,15 +17,16 @@ public class QuestionActivity extends ActivityMel {
 
     private TextView questionTittle, questionTopic, questionDescription;
     private Button correctButton, incorrectButton;
-    private SharedPreferences sp_PlayerTurn;
     private Context context;
     private String penalty;
+    private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
-
+        context = getApplicationContext();
+        sharedPreferencesManager = SharedPreferencesManager.getInstance(this);
         loadUI();
     }
 
@@ -36,7 +37,6 @@ public class QuestionActivity extends ActivityMel {
         correctButton = (Button) findViewById(R.id.correctButton);
         incorrectButton = (Button) findViewById(R.id.incorrectButton);
 
-        setSharedPreferences();
         questionTittle.setText(getResources().getString(R.string.turnOf) + " " + getPlayerName());
 
         try {
@@ -54,13 +54,8 @@ public class QuestionActivity extends ActivityMel {
         setListeners();
     }
 
-    private void setSharedPreferences() {
-        context = getApplicationContext();
-        sp_PlayerTurn = context.getSharedPreferences(getString(R.string.preference_file_players_turns), Context.MODE_PRIVATE);
-    }
-
     private String getPlayerName() {
-        return sp_PlayerTurn.getString("nextPlayer", null);
+        return sharedPreferencesManager.getNextPlayer();
     }
 
     private void setListeners() {

@@ -2,7 +2,6 @@ package com.drunkmel.drunkmel;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.drunkmel.drunkmel.helpers.SharedPreferencesManager;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class PlayerActivity extends ActivityMel {
@@ -22,43 +23,18 @@ public class PlayerActivity extends ActivityMel {
     private Typeface custom_font;
     private Button addPlayerButton, nextButton;
     private LinearLayout playerItem;
-    private SharedPreferences sp_PlayerList, sp_PlayerScore, sp_PlayerTurn;
-    private Context context;
+    private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-        // Create shared Preferences file to manage the players score and turn.
-        createSharedPreferences();
+        sharedPreferencesManager = SharedPreferencesManager.getInstance(getApplicationContext());
+        sharedPreferencesManager.createPlayerSharedPreferences();
 
         loadUI();
         setDefaultPlayers(1);
-    }
-
-    private void createSharedPreferences() {
-        context = getApplicationContext();
-
-        // Creating new Shared Preferences file for players list
-        sp_PlayerList = context.getSharedPreferences(
-                getString(R.string.preference_file_players_list), Context.MODE_PRIVATE);
-
-        // Creating new Shared Preferences file for players score
-        sp_PlayerScore = context.getSharedPreferences(
-                getString(R.string.preference_file_players_score), Context.MODE_PRIVATE);
-
-        // Creating new Shared Preferences file for players turn
-        sp_PlayerTurn = context.getSharedPreferences(
-                getString(R.string.preference_file_players_turns), Context.MODE_PRIVATE);
-
-        // Clean all the Shared Preferences before starting a new game
-        context.getSharedPreferences(getString(R.string.preference_file_players_list), 0)
-                .edit().clear().apply();
-        context.getSharedPreferences(getString(R.string.preference_file_players_score), 0)
-                .edit().clear().apply();
-        context.getSharedPreferences(getString(R.string.preference_file_players_turns), 0)
-                .edit().clear().apply();
     }
 
     private void loadUI(){
@@ -70,7 +46,7 @@ public class PlayerActivity extends ActivityMel {
         nextButton = (Button) findViewById(R.id.next);
         playerItem = (LinearLayout) findViewById(R.id.playerItem);
 
-        setListeners(context);
+        setListeners(getApplicationContext());
         enableButton(nextButton, false);
     }
 
@@ -128,18 +104,18 @@ public class PlayerActivity extends ActivityMel {
                 for(index=0; index< playerItem.getChildCount(); ++index) {
                     EditText nextChild = (EditText) playerItem.getChildAt(index);
 
-                    setPlayerList(Integer.toString(index), nextChild.getText().toString());
-                    setPlayerScore(Integer.toString(index));
+                    sharedPreferencesManager.setPlayerInList(index, nextChild.getText().toString());
+                    sharedPreferencesManager.setPlayerScore(Integer.toString(index), 0);
 
                     if (index == 0) {
-                        setPlayerTurn("nextPlayer", nextChild.getText().toString());
+                        sharedPreferencesManager.setPlayerTurn(sharedPreferencesManager.NEXT_PLAYER, nextChild.getText().toString());
                     } else {
                         lastPlayer = nextChild.getText().toString();
                     }
                 }
                 // Set the last player to enable finalize button
-                setPlayerTurn("lastTurn", lastPlayer);
-
+                sharedPreferencesManager.setPlayerTurn(sharedPreferencesManager.LAST_TURN, lastPlayer);
+                sharedPreferencesManager.setDefaultScores();
                 startActivity(i);
                 finish();
             }
@@ -178,17 +154,5 @@ public class PlayerActivity extends ActivityMel {
         } else {
             button.setAlpha(0.7F);
         }
-    }
-
-    private void setPlayerList(String id, String player) {
-        sp_PlayerList.edit().putString(id, player).commit();
-    }
-
-    private void setPlayerScore(String id) {
-        sp_PlayerScore.edit().putInt(id, 0).commit();
-    }
-
-    private void setPlayerTurn(String positionTurn, String playerName) {
-        sp_PlayerTurn.edit().putString(positionTurn, playerName).commit();
     }
 }

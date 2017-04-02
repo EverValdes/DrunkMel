@@ -1,12 +1,15 @@
 package com.drunkmel.drunkmel;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class ActivityMel extends AppCompatActivity {
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.context = getApplicationContext();
         super.onCreate(savedInstanceState);
     }
 

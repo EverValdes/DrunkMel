@@ -2,13 +2,13 @@ package com.drunkmel.drunkmel;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.drunkmel.drunkmel.helpers.ListViewAdapter;
+import com.drunkmel.drunkmel.helpers.SharedPreferencesManager;
 import com.drunkmel.drunkmel.helpers.SortMapByValue;
 
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ScoreActivity extends ActivityMel {
 
-    private SharedPreferences sp_PlayerList, sp_PlayerScore;
+    private SharedPreferencesManager sharedPreferencesManager;
     private Button finalizeGameButton;
     private ListView listView;
     private Context context;
@@ -25,7 +25,8 @@ public class ScoreActivity extends ActivityMel {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
-
+        context = getApplicationContext();
+        sharedPreferencesManager = SharedPreferencesManager.getInstance(context);
         loadUI();
     }
 
@@ -33,27 +34,19 @@ public class ScoreActivity extends ActivityMel {
         finalizeGameButton = (Button) findViewById(R.id.finalizeGame);
         listView = (ListView) findViewById(R.id.resultsListView);
 
-        setSharedPreferences();
         showScoreFromSharedPref();
         setListeners();
-    }
-
-    private void setSharedPreferences() {
-        context = getApplicationContext();
-        sp_PlayerList = context.getSharedPreferences(getString(R.string.preference_file_players_list), Context.MODE_PRIVATE);
-        sp_PlayerScore = context.getSharedPreferences(getString(R.string.preference_file_players_score), Context.MODE_PRIVATE);
     }
 
     private void showScoreFromSharedPref() {
 
         //Get the scores for all players
-        Map<String, ?> players = sp_PlayerList.getAll();
+        Map<String, ?> players = sharedPreferencesManager.getAllPlayers();
         Map<String, Integer> playersScores = new HashMap<>();
         int playersCount = 0;
         for (Map.Entry<String, ?> entry : players.entrySet()) {
             playersCount++;
-            playersScores.put(entry.getValue().toString(), sp_PlayerScore.getInt(
-                    entry.getKey().toString(), 0));
+            playersScores.put(entry.getValue().toString(), sharedPreferencesManager.getPlayerScore(sharedPreferencesManager.getPlayerInList(entry.getKey())));
             }
 
         //Sort the Map
