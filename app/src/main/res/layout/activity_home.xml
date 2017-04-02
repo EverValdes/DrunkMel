@@ -21,9 +21,15 @@
         android:layout_centerHorizontal="true" />
 
     <Button
+        android:id="@+id/playerHistoryButton"
+        android:text="@string/playerHistoryButton"
+        android:layout_alignParentBottom="true"
+        style="@style/HomeButton"/>
+
+    <Button
         android:id="@+id/questionButton"
         android:text="@string/questionButton"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/playerHistoryButton"
         style="@style/HomeButton"/>
 
     <Button

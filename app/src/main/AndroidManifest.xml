@@ -22,6 +22,7 @@
         <activity android:name=".QuestionAnswerActivity" />
         <activity android:name=".ScoreActivity" />
         <activity android:name=".PenaltyActivity" />
+        <activity android:name=".PlayerHistoryActivity" />
         
     </application>
 

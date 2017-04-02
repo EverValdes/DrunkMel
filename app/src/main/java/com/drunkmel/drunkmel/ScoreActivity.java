@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.drunkmel.drunkmel.helpers.ListViewAdapter;
 import com.drunkmel.drunkmel.helpers.SharedPreferencesManager;
 import com.drunkmel.drunkmel.helpers.SortMapByValue;
+import com.drunkmel.drunkmel.persistent.DrunkMelDataBase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,6 +58,10 @@ public class ScoreActivity extends ActivityMel {
         String[] finalScores = new String[playersCount];
         int index = 0;
         for (Map.Entry<String, ?> entry : sortedMap.entrySet()) {
+            if (index == 0) {
+                DrunkMelDataBase drunkMelDB = DrunkMelDataBase.getInstance(context);
+                drunkMelDB.updatePlayerHistory(entry.getKey().toString(), (Integer) entry.getValue());
+            }
             finalPlayers[index] = entry.getKey();
             finalScores[index] = entry.getValue().toString();
             index++;

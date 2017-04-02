@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.drunkmel.drunkmel.helpers.SharedPreferencesManager;
+import com.drunkmel.drunkmel.model.PlayerHistory;
+import com.drunkmel.drunkmel.persistent.DrunkMelDataBase;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -112,6 +114,14 @@ public class PlayerActivity extends ActivityMel {
                     } else {
                         lastPlayer = nextChild.getText().toString();
                     }
+                    // Add players to the database
+                    PlayerHistory playerHistory = new PlayerHistory();
+                    playerHistory.setName(nextChild.getText().toString());
+                    playerHistory.setScore(0);
+                    playerHistory.setPoints(0);
+
+                    DrunkMelDataBase drunkMelDB = DrunkMelDataBase.getInstance(context);
+                    drunkMelDB.addPlayerHistory(playerHistory);
                 }
                 // Set the last player to enable finalize button
                 sharedPreferencesManager.setPlayerTurn(sharedPreferencesManager.LAST_TURN, lastPlayer);

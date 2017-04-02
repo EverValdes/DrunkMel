@@ -39,5 +39,8 @@
 
     <!--Score Activity-->
     <string name="scoreTittle">Tabla de posiciones</string>
+    <string name="playerHistoryButton">Mostrar Historial</string>
+    <string name="gotoHome">Volver al Inicio</string>
+    <string name="playerHistoryTittle">Historial de Partidas</string>
 
 </resources>
